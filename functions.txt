@@ -1,0 +1,12 @@
+select
+filter
+when
+where
+distinct
+
+
+hour_mapper = df.when((df['pick_up_hour'] < 6 | (df['pick_up_hour'] > 21), "latenight")
+  .when(df['pick_up_hour'] < 13, 'morning)
+  .otherwise('evening'))
+
+hourly_df.withColumn('tod', hour_mapper).select('tod').distinct()
